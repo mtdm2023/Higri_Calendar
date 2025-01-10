@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/bootstrap.rtl.min.css">
+
+  <link rel="stylesheet" href="./css/tscss2.css">
+  <link rel="stylesheet" href="./css/tscss3.css">
+  <link rel="stylesheet" href="./css/all.min.css">
+  <title>Calendar Design</title>
+
+</head>
+
+<body>
+  <div class="mt-5"></div>
+  <div class="container">
+    <div class="navigation-container p-3 rounded shadow mb-4">
+      <div class="d-flex justify-content-between w-100  align-items-center">
+        <div class="prev_month d-flex align-items-center">
+          <span class="me-2">
+            <img class="prevBtn Calender_arrows" src="./tsimg/arrowright.svg" alt="Previous Month">
+          </span>
+          <span class="lastMonth text-white"></span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+        
+          <div class="d-flex gap-2 align-items-center">
+            <div class="dropdown monthSelection">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="Hegry_months" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <span class="currentMonth text-white">شهر هجري</span>
+              <ul class="Hegry_MonthList dropdown-menu" aria-labelledby="Hegry_months" role="menu"></ul>
+            </button>
+            </div>
+            <div class="dropdown yearSelection">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="Hegry_years" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <span class="currentYear text-white">سنة هجرية</span>
+              </button>
+              <ul class="Hegry_yearList dropdown-menu" aria-labelledby="Hegry_years" role="menu"></ul>
+            </div>
+            
+            
+          </div>
+        </div>
+        <div class="next_month d-flex align-items-center">
+          <span class="nextMonth text-white"></span>
+          <div class="ms-2">
+            <img class="nextBtn Calender_arrows" src="./tsimg/arrowleft.svg" alt="Next Month">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <table class="mt-4 table " dir="rtl">
+      <thead>
+
+      </thead>
+      <tbody class="calender_days">
+        <tr class="HegryCalenderHeder">
+        </tr>
+      </tbody>
+    </table>
+    <div class="date-panel  mt-4 p-3  shadow d-flex justify-content-between align-items-center">
+      <img class="d-md-block d-none Calender_footer_icons" src="./tsimg/Calender_icon.svg" alt="">
+      <span class="DateResult"></span>
+      <button class="ms-2 border-0 bg-transparent" id="infoButton">
+        <img class="Calender_footer_icons"
+          src="https://tiknosoft.com/wp-content/uploads/2022/08/TIKNO-SOFT-GOLD-400.png" alt="">
+      </button>
+
+    </div>
+    <div class="popup" id="popupMessage">
+      <div class="popup-content">
+        <span class="close-btn" id="closeButton">&times;</span>
+        <p>This calendar application is thoughtfully designed and developed by <a href="https://tiknosoft.com/"
+            style="color: blue;">Tiknosoft</a> . Our goal is to provide you with a seamless and intuitive user
+          experience, blending functionality with ease of use. Thank you for choosing our product! </p>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <script src="./js/jquery-3.5.1.min.js"></script>
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <script src="./js/tsfldr/enums.js"></script>
+  <script src="./js/tsfldr/script.js"></script>
+</body>
+
+</html>

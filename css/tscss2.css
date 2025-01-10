@@ -1,0 +1,201 @@
+@charset "utf-8";
+/* ****Global***** */
+
+.Calender_arrows{
+  width: calc(35px * var(--icn_width));
+  height: calc(35px * var(--icn_width));
+  box-sizing: border-box;
+}
+.Calender_footer_icons{
+  width: calc(40px * var(--icn_width));
+  height: calc(40px * var(--icn_width));
+  box-sizing: border-box;
+}
+*{
+  padding: 0;
+  margin: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 30px ;
+  background-color: #f9f9f9;
+}
+span
+{
+  font-size: 18px !important;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin: 0 auto;
+}
+html[dir='ltr'] table {
+  direction: ltr !important;
+}
+thead tr:nth-child(1) {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+}
+th, td {
+  text-align: center;
+  padding: 10px;
+  font-size: 18px;
+  text-align: center;
+  vertical-align: middle;
+  width: 40px; /* Adjust as per your design */
+  height: 40px;
+ 
+}
+th {
+  background-color: #ccc;
+  font-weight: bold;
+}
+
+tbody, td, tfoot, th, thead, tr
+{
+  border: none !important;
+}
+td {
+  cursor: pointer;
+  background-color: #fff;
+}
+.highlight {
+  background-color: #dfe0e0 !important;
+}
+.Mousehighlight {
+  background-color: #dfe0e0 !important;
+}
+.active{
+  background-color: #a6d9ff !important;
+}
+.inactive {
+  background-color: darkgrey !important; 
+  color: white;
+}
+.prev_month , .nextBtn{
+  cursor: pointer;
+}
+.hegryDay{
+  background-color: rgb(7, 55, 85) !important;
+  color: white !important;
+}
+.nextBtn ,.prevBtn
+{
+  pointer-events: auto !important;
+}
+.Hegry_yearList
+{
+  overflow-y: scroll;
+  height: 200px;
+}
+.navigation-container {
+  background-color: rgb(7, 55, 85); 
+  border: 1px solid #ddd;   
+  border-radius: 8px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+}
+.date-panel{
+  border-bottom-right-radius: 20px !important;
+  border-bottom-left-radius: 20px !important;
+  background-color: #f8f9fa; border: 1px solid #ddd
+}
+.DateResult
+{
+  text-align: center;
+}
+
+.navigation-container .btn-secondary {
+  background-color: #007bff; 
+  border-color: #007bff;
+}
+
+.navigation-container span {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.Calnder_icon
+{
+  width: 5%;
+   
+}
+
+.navigation-container .dropdown-menu {
+  min-width: auto;
+}
+.popup {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Slightly darker overlay */
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out; /* Smooth fade-in effect */
+}
+
+.popup.show {
+  display: flex;
+  opacity: 1; /* Fully visible */
+}
+
+.popup-content {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+  animation: scaleIn 0.3s ease-in-out; /* Smooth zoom-in effect */
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 20px;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.close-btn:hover {
+  color: #000; /* Change color on hover */
+}
+
+.popup-content p {
+  font-family: 'Arial', sans-serif;
+  font-size: 18px;
+  color: #333;
+  margin: 20px 0 0;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.custom-tooltip {
+  --bs-tooltip-bg: black;
+  --bs-tooltip-color: white;
+}
+.rotate180
+{
+  transform: rotate(180deg);
+}
