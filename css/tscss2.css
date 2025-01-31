@@ -182,7 +182,11 @@ td {
   color: #333;
   margin: 20px 0 0;
 }
-
+.Lang
+{
+  cursor: pointer !important;
+  color: white !important;
+}
 @keyframes scaleIn {
   from {
     transform: scale(0.8);
@@ -198,4 +202,12 @@ td {
 .rotate180
 {
   transform: rotate(180deg);
+}
+.rotateInv180
+{
+  transform: rotate(-360deg);
+}
+.reset_rotate
+{
+  transform: rotate(0deg);
 }

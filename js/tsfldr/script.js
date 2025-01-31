@@ -3,6 +3,7 @@ $(document).ready(function () {
   let filteredArrFromDuplicates = [];
   var RecordsArray_Counter = 0;
   var Highlighted_day = 0;
+  var tempTsHMonthARNames = [];
   var isToltip = false;
   var Base_RecordsArray_Counter = 0;
   let DateResult = $(".DateResult");
@@ -16,6 +17,7 @@ $(document).ready(function () {
   const nextMonth = $(".nextBtn");
   const HegryYearList = $(".Hegry_yearList");
   const HegryMonthList = $(".Hegry_MonthList");
+  const Language_Switcher = $(".Lang");
 
   readData();
 
@@ -43,10 +45,34 @@ $(document).ready(function () {
     init_AUSpopup();
     setFontFamily();
     RefreshCalenderAfter24_Hours_auto();
+    $(Language_Switcher).on('click',()=>{
+      $(Language_Switcher).attr('clicked','true');
+      let lang_text = $(Language_Switcher).text();
+      if(lang_text == 'AR')
+      {
+        tempTsHMonthARNames = $.TsHMonthARNames 
+        $.TsHMonthARNames = $.TsHMonthENNames;
+        LanguageSwitch ('ltr');
+        $(Language_Switcher).text('EN');
+       
+      }
+      else
+      {
+        $.TsHMonthARNames = tempTsHMonthARNames;
+        $.TsDir = 'rtl';
+        $('HTML').attr('Dir','rtl');
+        LanguageSwitch ('rtl');
+        $(Language_Switcher).text('AR');
+       
+      }
+      
+    })
   }
 
   // Here First call of calender
   function FirstFillHegryData() {
+    calenderDays.children().not(".HegryCalenderHeder").empty();
+    InjectHeader_WeekNames();
     const notDuplicatedYears_ARR = records.filter((record, index, arr) => {
       return index === 0 || record["hyr"] !== arr[index - 1]["hyr"];
     });
@@ -55,6 +81,7 @@ $(document).ready(function () {
         `<li><a class="year_item dropdown-item" href="#" role="menuitem">${record["hyr"]}</a></li>`
       );
     });
+    HegryMonthList.empty();
     $.TsHMonthARNames.forEach((M_name) => {
       HegryMonthList.append(
         `<li><a class="month_item dropdown-item" href="#" role="menuitem">${M_name}</a></li>`
@@ -590,10 +617,13 @@ $(document).ready(function () {
   }
   function RotatArrws_rtl_ltr() {
     $(".prevBtn, .nextBtn").each(function () {
-      if ($.TsDir == "ltr") {
-        $(this).addClass("rotate180");
+      if ($.TsDir === "ltr") {
+          $(this).addClass("rotate180").removeClass("reset_rotate"); // Ensure classes are managed properly
+      } else if ($(Language_Switcher).attr("clicked") === "true" && $.TsDir === "rtl") {
+          $(this).removeClass("rotate180").addClass("reset_rotate");
       }
-    });
+  });
+  
   }
   function executeCode() {
     console.log("Code executed at:", new Date().toLocaleString());
@@ -617,5 +647,24 @@ function getTimeUntilMidnight() {
   }, getTimeUntilMidnight());
   
      
+  }
+  function LanguageSwitch(DIR) {
+    const HTMLDir = $('HTML').attr('Dir');
+    if(DIR =="rtl" && HTMLDir =='rtl')
+    {
+       $.TsDir = 'rtl';
+       $('HTML').attr('Dir','rtl');
+       FirstFillHegryData();
+       RotatArrws_rtl_ltr();
+    }
+    else
+    {
+      $.TsDir = 'ltr';
+      $('HTML').attr('Dir','ltr');
+      FirstFillHegryData();
+      RotatArrws_rtl_ltr();
+    
+      
+    }
     }
 });
