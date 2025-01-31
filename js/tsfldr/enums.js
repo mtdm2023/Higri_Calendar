@@ -264,7 +264,11 @@ $(document).ready(function () {
   $.Tstooltip_hide_time = 0;
   $.Tstooltip_delay = 1000;
   $.TsDir = "rtl";
-  $.TsFontfamily = ""
+  $.TsFontfamily = "";
+  $.No_Next_MonthAR_Text = "لا يوجد شهر تالي";
+  $.No_Next_MonthEN_Text = "No Next Month found";
+  $.No_Prev_MonthAR_Text = "لا يوجد شهر سابق";
+  $.No_Prev_MonthEN_Text = "No prev Month found";
   $.TsWeakDayNames = [
     "الاحد",
     "الاثنين",
@@ -362,4 +366,6 @@ $(document).ready(function () {
   ];
   $.TsStrOut =
     "_DW_ الموافق _HDD_ من شهر _HMM_ عام _HY4_ هجريا &nbsp الموافق &nbsp _GY4_  من شهر _GMM_  عام  _GDD_ ميلاديا ";
+  $.TsStrOutEN =
+    "_DW_ Corresponding _HDD_ From Month _HMM_ Year _HY4_ Higri &nbsp Corresponding &nbsp _GY4_  From Month _GMM_  Year  _GDD_ Gregorian ";
 });

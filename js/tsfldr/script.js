@@ -42,6 +42,7 @@ $(document).ready(function () {
     Calender_Day_click_handler();
     init_AUSpopup();
     setFontFamily();
+    RefreshCalenderAfter24_Hours_auto();
   }
 
   // Here First call of calender
@@ -67,7 +68,7 @@ $(document).ready(function () {
         record.greg_date.split("/")[0].padStart(2, "0") === dateNow_array[1]
     );
     // here we check if this this greg day is the last day in this month
-    // Assuming the date format is MM/DD/YYYY
+
     const month = parseInt(dateNow_array[0], 10) - 1; 
     const day = parseInt(dateNow_array[1], 10);
     const year = parseInt(dateNow_array[2], 10);
@@ -198,14 +199,14 @@ $(document).ready(function () {
       if (nextIndex < records.length) {
         nextMonthText.text($.TsHMonthARNames[records[nextIndex]["hmn"] - 1]);
       } else {
-        nextMonthText.text("No Next Month");
+        nextMonthText.text($.TsDir == "rtl" ?   $.No_Next_MonthAR_Text  : $.No_Next_MonthEN_Text );
       }
 
       const prevIndex = RecordsArray_Counter - 1;
       if (prevIndex >= 0) {
         lastMonthText.text($.TsHMonthARNames[records[prevIndex]["hmn"] - 1]);
       } else {
-        lastMonthText.text("لا يوجد شهر سابق");
+        lastMonthText.text($.TsDir == "rtl" ?   $.No_Prev_MonthAR_Text  : $.No_Prev_MonthEN_Text );
       }
       $.TsFtrNow[0]["_HY4_"] = records[RecordsArray_Counter]["hyr"];
       $.TsFtrNow[0]["_HMM_"] = records[RecordsArray_Counter]["hmn"];
@@ -238,7 +239,7 @@ $(document).ready(function () {
       if (nextIndex < records.length) {
         nextMonthText.text($.TsHMonthARNames[records[nextIndex]["hmn"] - 1]);
       } else {
-        nextMonthText.text("لا يوجد شهر تالي");
+        nextMonthText.text($.TsDir == "rtl" ?   $.No_Next_MonthAR_Text  : $.No_Next_MonthEN_Text );
       }
 
       // Set the last month text (check for boundary)
@@ -246,7 +247,7 @@ $(document).ready(function () {
       if (prevIndex >= 0) {
         lastMonthText.text($.TsHMonthARNames[records[prevIndex]["hmn"] - 1]);
       } else {
-        lastMonthText.text("لا يوجد شهر سابق");
+        lastMonthText.text($.TsDir == "rtl" ?   $.No_Prev_MonthAR_Text  : $.No_Prev_MonthEN_Text );
       }
       $.TsFtrNow[0]["_HY4_"] = records[RecordsArray_Counter]["hyr"];
       $.TsFtrNow[0]["_HMM_"] = records[RecordsArray_Counter]["hmn"];
@@ -310,13 +311,13 @@ $(document).ready(function () {
     if (nextIndex < records.length) {
       nextMonthText.text($.TsHMonthARNames[records[nextIndex]["hmn"] - 1]);
     } else {
-      nextMonthText.text("لا يوجد شهر تالي");
+      nextMonthText.text($.TsDir == "rtl" ?   $.No_Next_MonthAR_Text  : $.No_Next_MonthEN_Text );
     }
     const prevIndex = RecordsArray_Counter - 1;
     if (prevIndex >= 0) {
       lastMonthText.text($.TsHMonthARNames[records[prevIndex]["hmn"] - 1]);
     } else {
-      lastMonthText.text("لا يوجد شهر سابق");
+      lastMonthText.text($.TsDir == "rtl" ?   $.No_Prev_MonthAR_Text  : $.No_Prev_MonthEN_Text );
     }
     $.TsFtrNow[0]["_HY4_"] = records[RecordsArray_Counter]["hyr"];
     $.TsFtrNow[0]["_HMM_"] = records[RecordsArray_Counter]["hmn"];
@@ -380,7 +381,7 @@ $(document).ready(function () {
       parseInt(SelectedDay, 10) - 1
     );
     const [day, month, year] = correspondingGregDate.split("/");
-    $.TsFtrNow._DW_ = $.TsWeakDayNames[get_indexof_selectedDay(SelectedDay)];
+    $.TsFtrNow._DW_ =  $.TsDir == "rtl" ? $.TsWeakDayNames[get_indexof_selectedDay(SelectedDay)]   : $.TsWeakDayNamesEN[get_indexof_selectedDay(SelectedDay)]  ;
     $.TsFtrNow._GDD_ = day;
     $.TsFtrNow._GMM_ = month;
     $.TsFtrNow._GY4_ = year;
@@ -389,7 +390,7 @@ $(document).ready(function () {
     $.TsFtrNow._HMM_ = CurrentMonth;
     $.TsFtrNow._HY4_ = currentYear;
     if (isToltip == false) {
-      let newUOutString = $.TsStrOut;
+      let newUOutString = $.TsDir == "rtl" ?   $.TsStrOut  : $.TsStrOutEN  ;
       Object.keys($.TsFtrNow).forEach((key) => {
         newUOutString = newUOutString.replaceAll(key, $.TsFtrNow[key] || "");
       });
@@ -594,4 +595,27 @@ $(document).ready(function () {
       }
     });
   }
+  function executeCode() {
+    console.log("Code executed at:", new Date().toLocaleString());
+    RefreshCalender();
+}
+function getTimeUntilMidnight() {
+  const now = new Date();
+  const midnight = new Date(now);
+  midnight.setHours(24, 0, 0, 0); // Set to next midnight
+  return midnight - now; // Time difference in milliseconds
+
+}
+
+  function RefreshCalenderAfter24_Hours_auto() {
+
+  // Run the code at midnight and then every 24 hours
+  setTimeout(() => {
+      executeCode();
+      setInterval(executeCode, 24 * 60 * 60 * 1000); // Repeat every 24 hours
+  
+  }, getTimeUntilMidnight());
+  
+     
+    }
 });
