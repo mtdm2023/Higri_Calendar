@@ -94,6 +94,16 @@ $(document).ready(function () {
         record.greg_date.split("/")[2] === dateNow_array[2] &&
         record.greg_date.split("/")[0].padStart(2, "0") === dateNow_array[1]
     );
+    if(RecordsArray_Counter == -1)
+    {
+      RecordsArray_Counter = records.findIndex(
+        (record) =>
+          record.greg_date.split("/")[2] === dateNow_array[2] &&
+        String(parseInt(record.greg_date.split("/")[0], 10) - 1).padStart(2, "0") === dateNow_array[1]
+
+      );
+      RecordsArray_Counter = RecordsArray_Counter-1 
+    }
     // here we check if this this greg day is the last day in this month
 
     const month = parseInt(dateNow_array[0], 10) - 1; 
@@ -123,7 +133,8 @@ $(document).ready(function () {
 
     Get_HegryData_Gregdate_According_2_SelectedDay(
       null,
-      $($(".CalenderDay")[Highlighted_day]).text(),
+      $(".CalenderDay").not('.inactive').eq(Highlighted_day).text()
+      ,
       records[RecordsArray_Counter]["hmn"],
       records[RecordsArray_Counter]["hyr"],
       $.TsWeakDayNames[
@@ -261,7 +272,7 @@ $(document).ready(function () {
         $.TsHMonthARNames[records[RecordsArray_Counter]["hmn"] - 1]
       );
 
-      // Set the next month text (check for boundary)
+   
       const nextIndex = RecordsArray_Counter + 1;
       if (nextIndex < records.length) {
         nextMonthText.text($.TsHMonthARNames[records[nextIndex]["hmn"] - 1]);
@@ -269,7 +280,7 @@ $(document).ready(function () {
         nextMonthText.text($.TsDir == "rtl" ?   $.No_Next_MonthAR_Text  : $.No_Next_MonthEN_Text );
       }
 
-      // Set the last month text (check for boundary)
+   
       const prevIndex = RecordsArray_Counter - 1;
       if (prevIndex >= 0) {
         lastMonthText.text($.TsHMonthARNames[records[prevIndex]["hmn"] - 1]);
@@ -519,15 +530,20 @@ $(document).ready(function () {
     }
   }
   function highlightOnCurrentHegryDay() {
-    const currentDate = getCurrentDate();
-    const dateNow_array = currentDate.split("/");
-    const currentrecord = records[RecordsArray_Counter];
-    const gregstartDate_day = currentrecord["greg_date"].split("/")[1];
-    const Hegryoffset = dateNow_array[0] - parseInt(gregstartDate_day);
+    let currentDate = getCurrentDate();
+    let dateNow_array = currentDate.split("/");
+    let currentrecord = records[RecordsArray_Counter];
+    let gregstartDate_day = currentrecord["greg_date"].split("/")[1];
+    let Hegryoffset = dateNow_array[0] - parseInt(gregstartDate_day);
+    if(Hegryoffset < 0)
+    {
+      Hegryoffset = dateNow_array[0];
+    }
     Highlighted_day = Hegryoffset;
     if (RecordsArray_Counter === Base_RecordsArray_Counter) {
       $(".CalenderDay").removeClass("active");
-      $($(".CalenderDay")[Hegryoffset]).addClass("active");
+      $(".CalenderDay").not('.inactive').eq(Hegryoffset).addClass("active");
+
     }
   }
 
