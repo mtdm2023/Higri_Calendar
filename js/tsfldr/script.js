@@ -255,7 +255,7 @@ $(document).ready(function () {
     });
 
     nextMonth.on("click", (e) => {
-      console.log(RecordsArray_Counter);
+ 
       if (RecordsArray_Counter < records.length - 1) {
         ++RecordsArray_Counter;
       }
@@ -611,14 +611,14 @@ $(document).ready(function () {
     const headerRow = $(".HegryCalenderHeder");
     headerRow.empty();
     if ($.TsDir == "rtl") {
-      console.log("here");
+     
 
       $.TsWeakDayNames.forEach(function (day) {
         const th = $("<th>").addClass("hegryDay").text(day);
         headerRow.append(th);
       });
     } else {
-      console.log("here");
+
       $.TsWeakDayNamesEN.forEach(function (day) {
         const th = $("<th>").addClass("hegryDay").text(day);
         headerRow.append(th);
@@ -642,7 +642,7 @@ $(document).ready(function () {
   
   }
   function executeCode() {
-    console.log("Code executed at:", new Date().toLocaleString());
+ 
     RefreshCalender();
 }
 function getTimeUntilMidnight() {
